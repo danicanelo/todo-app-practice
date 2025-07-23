@@ -1,0 +1,53 @@
+.todo-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  list-style: none;
+  width: 100%;
+  padding: 8px;
+}
+
+.modern-checkbox {
+  /* display: flex; */
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.modern-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.modern-checkbox input:checked + .checkmark {
+  border-color: #4caf50;
+}
+
+.checkmark-inner {
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #4caf50;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  background-color: #4caf50;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
