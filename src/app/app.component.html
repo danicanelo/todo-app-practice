@@ -1,5 +1,5 @@
 <div style="height: 100vh; display: flex; justify-content: center; align-items:first baseline">
-  <div class="has-background-primary-light" style="display: flex; flex-direction: column; align-items: center; gap: 10px; width: 300px; min-height: 400px; max-height: auto; max-width: auto; margin-top: 20px;">
+  <div class="has-background-primary-light" style="display: flex; flex-direction: column; align-items: center; gap: 10px; width: 300px; min-height: 400px; max-height: auto; max-width: auto; margin-top: 20px; border-radius: 5px;">
     <h1>Prueba</h1>
     <div>
       <input
@@ -22,16 +22,17 @@
           list-style: none;
         "
       >
-        <label class="checkbox">
+        <label class="custom-checkbox">
           <input
             type="checkbox"
             [checked]="todo.completed"
             (change)="toggleCompleted(todo)"
           />
+          <span class="checkmark"></span>
         </label>
 
         <div style="flex: 1">
-          <span *ngIf="!todo.editing" (dblclick)="startEditing(todo)">{{
+          <span class="todo-text" [class.completed]="todo.completed" *ngIf="!todo.editing" (dblclick)="startEditing(todo)">{{
             todo.title
           }}</span>
           <input

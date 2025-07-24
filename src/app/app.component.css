@@ -1,53 +1,68 @@
-.todo-item {
+.custom-checkbox {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 5px;
-  list-style: none;
-  width: 100%;
-  padding: 8px;
-}
-
-.modern-checkbox {
-  /* display: flex; */
   align-items: center;
   cursor: pointer;
   user-select: none;
-  position: relative;
+  gap: 8px; /* Espacio entre checkbox y texto */
 }
 
-.modern-checkbox input {
-  display: none;
+/* Ocultar el checkbox original pero mantenerlo en el flujo */
+.custom-checkbox input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
 }
 
+/* Estilo del checkbox personalizado */
 .checkmark {
+  display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid #ddd;
+  background-color: #eee;
+  border: 2px solid #ccc;
   border-radius: 4px;
-  margin-right: 10px;
   position: relative;
+  flex-shrink: 0; /* Evita que se comprima */
   transition: all 0.3s ease;
 }
 
-.modern-checkbox input:checked + .checkmark {
+/* Cuando está checkeado */
+.custom-checkbox input:checked + .checkmark {
+  background-color: #4caf50;
   border-color: #4caf50;
 }
 
-.checkmark-inner {
+/* Crear la marca de check */
+.checkmark::after {
+  content: "";
   position: absolute;
+  display: none;
   left: 6px;
   top: 2px;
-  width: 5px;
+  width: 6px;
   height: 10px;
-  border: solid #4caf50;
+  border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
-  background-color: #4caf50;
 }
 
-.completed {
+.custom-checkbox input:checked + .checkmark::after {
+  display: block;
+}
+
+/* Efecto hover */
+.custom-checkbox:hover .checkmark {
+  border-color: #4caf50;
+}
+
+.todo-text.completed {
   text-decoration: line-through;
   color: #888;
+}
+
+/* Estilos adicionales para el texto */
+.todo-text {
+  transition: all 0.3s ease;
 }
