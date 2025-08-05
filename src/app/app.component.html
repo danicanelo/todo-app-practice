@@ -80,9 +80,9 @@
           <button (click)="startEditing(todo)" *ngIf="!todo.completed">
             <i class="fa-solid fa-pen" style="color: #8a8a8a"></i>
           </button>
-          <button (click)="writeNote()" *ngIf="!todo.completed">
+          <!-- <button (click)="writeNote()" *ngIf="!todo.completed">
             <i class="fa-regular fa-note-sticky" style="color: #8a8a8a"></i>
-          </button>
+          </button> -->
           <button (click)="deleteTodo(todo.id!)">
             <i class="fa-solid fa-trash" style="color: #8a8a8a"></i>
           </button>
