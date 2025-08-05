@@ -67,7 +67,7 @@
   transition: all 0.3s ease;
 }
 
-.todo-item .delete {
+.todo-item .buttons {
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-.todo-item:hover .delete {
+.todo-item:hover .buttons {
   opacity: 1;
 }
 

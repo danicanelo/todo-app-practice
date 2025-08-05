@@ -60,6 +60,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.todoService.updateTodo(todo).subscribe();
   }
 
+  writeNote() {
+    //TODO
+  }
+
   startEditing(todo: Todo) {
     this.todos.forEach(t => t.editing = false);
     todo.editing = true;
