@@ -1,6 +1,7 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Todo, TodoService } from './services/todo.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { IaService } from './services/ia.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
   todos: Todo[] = [];
   newTodo = '';
   editing: boolean = false;
+  iaMessage: string = '';
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private iaService: IaService) { }
 
   ngOnInit(): void {
     this.loadTodos();
@@ -40,7 +42,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       completed: false
     };
     this.todoService.addTodo(todo).subscribe(newTodo => {
-      this.todos.push(newTodo);
+      this.todos.unshift(newTodo);
       this.newTodo = '';
     })
   }
@@ -56,9 +58,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   toggleCompleted(todo: Todo) {
+    this.iaMessage = '';
     todo.completed = !todo.completed;
-    this.todoService.updateTodo(todo).subscribe(() => {
+    this.todoService.updateTodo(todo).subscribe(async () => {
       this.loadTodos();
+      if (todo.completed) {
+        this.iaMessage = await this.iaService.generateMessage(todo.title);
+      }
     });
   }
 
