@@ -57,7 +57,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   toggleCompleted(todo: Todo) {
     todo.completed = !todo.completed;
-    this.todoService.updateTodo(todo).subscribe();
+    this.todoService.updateTodo(todo).subscribe(() => {
+      this.loadTodos();
+    });
   }
 
   writeNote() {

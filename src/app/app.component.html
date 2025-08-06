@@ -14,8 +14,9 @@
       align-items: center;
       gap: 10px;
       width: 400px;
-      min-height: 400px;
-      max-height: auto;
+      min-height: 300px;
+      max-height: 600px;
+      overflow-y: auto;
       max-width: auto;
       margin-top: 20px;
       border-radius: 5px;
@@ -68,6 +69,7 @@
             >{{ todo.title }}</span
           >
           <input
+            class="input is-primary has-background-white has-text-primary-dark"
             #editInput
             *ngIf="todo.editing"
             type="text"

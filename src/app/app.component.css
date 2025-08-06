@@ -65,6 +65,7 @@
 /* Estilos adicionales para el texto */
 .todo-text {
   transition: all 0.3s ease;
+  cursor: grab;
 }
 
 .todo-item .buttons {
