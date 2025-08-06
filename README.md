@@ -9,7 +9,10 @@ Simple and functional app for managing daily tasks.
 - Tasks can be reordered manually, and the order is persisted in the database (simulated with json server).
 - Once completed, a task can only be deleted, not edited.
 
-A feature to add longer notes to each task is currently in development.
+Currenty in development:
+
+- A feature to add longer notes to each task.
+- AI integration to receive motivational responses when marking a task as completed.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
 
