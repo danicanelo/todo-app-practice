@@ -1,6 +1,8 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Todo, TodoService } from './services/todo.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { IaService } from './services/ia.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
   todos: Todo[] = [];
   newTodo = '';
   editing: boolean = false;
+  iaMessage: string = '';
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private iaService: IaService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadTodos();
@@ -40,7 +43,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       completed: false
     };
     this.todoService.addTodo(todo).subscribe(newTodo => {
-      this.todos.push(newTodo);
+      this.todos.unshift(newTodo);
       this.newTodo = '';
     })
   }
@@ -56,14 +59,21 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   toggleCompleted(todo: Todo) {
+    this.iaMessage = '';
     todo.completed = !todo.completed;
-    this.todoService.updateTodo(todo).subscribe(() => {
+    this.todoService.updateTodo(todo).subscribe(async () => {
       this.loadTodos();
+      if (todo.completed) {
+        try {
+          this.iaMessage = await this.iaService.generateMessage(todo.title);
+        } catch (error) {
+          console.error('Error al generar mensaje personalizado de IA', error);
+          this.iaMessage = 'Ha habido un error al intentar cargar un mensaje personalizado'
+        } finally {
+          this.toastr.success(this.iaMessage, todo.title);
+        }
+      }
     });
-  }
-
-  writeNote() {
-    //TODO
   }
 
   startEditing(todo: Todo) {

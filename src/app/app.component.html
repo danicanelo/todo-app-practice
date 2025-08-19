@@ -2,8 +2,9 @@
   style="
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: first baseline;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
   "
 >
   <div
@@ -33,7 +34,7 @@
       />
     </div>
     <ul
-      class="has-text-primary-dark"
+      class="has-text-primary-dark mb-3"
       style="width: inherit; padding: 10px 30px 0 30px"
       cdkDropList
       (cdkDropListDropped)="drop($event)"
@@ -82,9 +83,6 @@
           <button (click)="startEditing(todo)" *ngIf="!todo.completed">
             <i class="fa-solid fa-pen" style="color: #8a8a8a"></i>
           </button>
-          <!-- <button (click)="writeNote()" *ngIf="!todo.completed">
-            <i class="fa-regular fa-note-sticky" style="color: #8a8a8a"></i>
-          </button> -->
           <button (click)="deleteTodo(todo.id!)">
             <i class="fa-solid fa-trash" style="color: #8a8a8a"></i>
           </button>
