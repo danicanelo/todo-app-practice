@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   newTodo = '';
   editing: boolean = false;
   iaMessage: string = '';
+  isGenerating: boolean = false;
 
   constructor(private todoService: TodoService, private iaService: IaService, private toastr: ToastrService) { }
 
@@ -65,11 +66,14 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.loadTodos();
       if (todo.completed) {
         try {
+          this.isGenerating = true;
           this.iaMessage = await this.iaService.generateMessage(todo.title);
         } catch (error) {
+          this.isGenerating = false;
           console.error('Error al generar mensaje personalizado de IA', error);
           this.iaMessage = 'Ha habido un error al intentar cargar un mensaje personalizado'
         } finally {
+          this.isGenerating = false;
           this.toastr.success(this.iaMessage, todo.title);
         }
       }

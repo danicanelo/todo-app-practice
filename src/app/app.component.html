@@ -8,7 +8,7 @@
   "
 >
   <div
-    class="has-background-primary-light"
+    class="has-background-primary-light todo-box"
     style="
       display: flex;
       flex-direction: column;
@@ -89,5 +89,16 @@
         </div>
       </li>
     </ul>
+    <div class="todo-box-overlay" *ngIf="isGenerating"></div>
+  </div>
+  <div
+    *ngIf="isGenerating"
+    style="display: flex; flex-direction: column; align-items: center"
+  >
+    <p>Generando mensaje, puede llevar unos segundos...</p>
+    <mat-progress-spinner
+      color="accent"
+      mode="indeterminate"
+    ></mat-progress-spinner>
   </div>
 </div>
