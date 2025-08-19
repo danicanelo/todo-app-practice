@@ -12,7 +12,7 @@ Simple and functional app for managing daily tasks.
 
 Future features:
 
-- A feature to add longer notes to each task.
+- Add longer notes to each task.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
 
