@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { Todo, TodoService } from './services/todo.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { IaService } from './services/ia.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   editing: boolean = false;
   iaMessage: string = '';
 
-  constructor(private todoService: TodoService, private iaService: IaService) { }
+  constructor(private todoService: TodoService, private iaService: IaService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadTodos();
@@ -63,13 +64,16 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.todoService.updateTodo(todo).subscribe(async () => {
       this.loadTodos();
       if (todo.completed) {
-        this.iaMessage = await this.iaService.generateMessage(todo.title);
+        try {
+          this.iaMessage = await this.iaService.generateMessage(todo.title);
+        } catch (error) {
+          console.error('Error al generar mensaje personalizado de IA', error);
+          this.iaMessage = 'Ha habido un error al intentar cargar un mensaje personalizado'
+        } finally {
+          this.toastr.success(this.iaMessage, todo.title);
+        }
       }
     });
-  }
-
-  writeNote() {
-    //TODO
   }
 
   startEditing(todo: Todo) {

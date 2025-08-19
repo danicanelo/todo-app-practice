@@ -12,7 +12,7 @@ export class IaService {
   private model = 'llama3';
 
   async generateMessage(todo: string): Promise<string> {
-    const prompt = `Eres un asistente sarcástico y cínico pero divertido. Di algo breve (una única sentencia de entre 20-30 palabras) como respuesta para alguien que acaba de completar esta tarea: ${todo} (o que ha incluido ese elemento en su lista de tareas, quizá sea un elemento a comprar o algo así). Sé creativo, no uses emojis. Usa el idioma en que esté escrita la tarea.`;
+    const prompt = `Eres un asistente motivador y amable. Di algo breve (una única sentencia de entre 20-30 palabras) como respuesta para alguien que acaba de completar esta tarea: ${todo} (o que ha incluido ese elemento en su lista de tareas, quizá sea un elemento a comprar o algo así). Sé creativo, no uses emojis. Usa el idioma en que esté escrita la tarea.`;
 
     const body = {
       model: this.model,
