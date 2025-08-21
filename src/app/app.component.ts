@@ -1,13 +1,15 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Todo, TodoService } from './services/todo.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { IaService } from './services/ia.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, AfterViewChecked {
   @ViewChild('editInput', { static: false }) editInput!: ElementRef;
@@ -18,10 +20,11 @@ export class AppComponent implements OnInit, AfterViewChecked {
   iaMessage: string = '';
   isGenerating: boolean = false;
 
-  constructor(private todoService: TodoService, private iaService: IaService, private toastr: ToastrService) { }
+  constructor(private todoService: TodoService, private iaService: IaService, private toastr: ToastrService, private translocoService: TranslocoService) { }
 
   ngOnInit(): void {
     this.loadTodos();
+    this.translocoService.setDefaultLang('es');
   }
 
   loadTodos() {
@@ -113,6 +116,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.todoService.updateTodo(todo).subscribe();
       }
     }
+  }
+
+  changeLanguage(lang: string) {
+    this.translocoService.setActiveLang(lang);
   }
 
   ngAfterViewChecked(): void {
