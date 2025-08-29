@@ -22,7 +22,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Run `npm run start` for running frontend.
 - Navigate to `http://localhost:4200/`.
 
-## AI Integration
+## AI Integration (optional)
 
 - Install [Ollama](https://ollama.com/download) on your machine.
 - Pull the llama3 model by running `ollama pull llama3`.
+
+NOTE: AI integration is optional – if the application doesn't detect an Ollama integration, it will display a generic message and continue to function normally and smoothly.
